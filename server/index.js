@@ -8,11 +8,8 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Path to the Stockfish executable in sibling folder:
-// project-root/
-// ├─ stockfish/stockfish-windows-x86-64-avx2.exe
-// └─ server/index.js
 const STOCKFISH_PATH = path.resolve(
   __dirname,
   "../stockfish/stockfish-ubuntu-x86-64-avx2"
@@ -25,7 +22,6 @@ let idleTimer = null;
 let lastActivity = null;
 let stdoutBuffer = "";
 
-// Start Stockfish process (if not already running)
 function startStockfish() {
   if (stockfishProcess) {
     console.log("Stockfish is already running.");

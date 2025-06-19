@@ -1,0 +1,55 @@
+@media (max-width: 480px) {
+  .botSelectorWrapper {
+    max-height: 450px;
+    overflow-y: auto;
+  }
+}
+
+.botSelectorWrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  height: auto;
+}
+
+.BotSelector {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem 1.5rem;
+}
+.botCard {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.botCard:hover {
+  border-color: #007bff;
+}
+
+.selected {
+  border-color: #007bff !important;
+  background-color: #cce5ff !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 8px #007bff;
+}
+
+.botInfo {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+img {
+  max-width: 58%;
+  height: auto;
+  border-radius: 50%;
+}
