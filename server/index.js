@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Path to the Stockfish executable in sibling folder:
 // project-root/
