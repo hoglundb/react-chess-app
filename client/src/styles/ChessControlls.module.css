@@ -1,51 +1,54 @@
-.container {
+.controlsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+}
+
+.clocksBotContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  user-select: none;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 12px;
-  padding: 12px;
-  background-color: #fff;
-  box-sizing: border-box;
 }
 
-
-.blackTurn {
-  color: green;
-  font-weight: bold;
-}
-
-.blackNotTurn {
-  color: gray;
-}
-
-.whiteTurn {
-  color: green;
-  font-weight: bold;
-}
-
-.whiteNotTurn {
-  color: gray;
-}
-
-.buttons {
+.buttonsContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  flex-shrink: 0;
 }
 
+/* Buttons */
 .button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #f0f0f0;
   cursor: pointer;
-  transition: background 0.2s;
-  padding: 6px 10px;
-  font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
-/* Optional hover effect */
 .button:hover {
-  background-color: #e0e0e0;
+  background-color: #0056b3;
+}
+
+/* Responsive: stack buttons below clocks and bot info on small screens */
+@media (max-width: 600px) {
+  .controlsWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttonsContainer {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
 }
