@@ -50,7 +50,7 @@ export default function ChessGame({ selectedBot, timeControl }) {
   };
 
   // Dynamically size board to fit screen, with some margin for controls
-  const boardWidth = Math.min(window.innerWidth - 32, window.innerHeight - 180, 700);
+  const boardWidth = Math.min(window.innerWidth, window.innerHeight - 250);
 
   return (
     <div className={styles.page}>
