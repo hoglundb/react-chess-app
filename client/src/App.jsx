@@ -8,22 +8,27 @@ function App() {
   const [timeControlMinutes, setTimeControlMinutes] = useState(5);
   const [gameStarted, setGameStarted] = useState(false);
 
+  const handleStartGame = ({ bot, time }) => {
+    setSelectedBot(bot);
+    setTimeControlMinutes(time);
+    setGameStarted(true);
+  };
+
   return (
     <div className="app-container">
-      <h1 style={{ margin: "12px", fontSize:"26pt" }}>My React Chess App</h1>    
+      <h1 style={{ margin: "12px", fontSize: "26pt" }}>My React Chess App</h1>
       {!gameStarted ? (
         <GameSetupControls
           selectedBot={selectedBot}
           onBotChange={setSelectedBot}
           selectedTimeControl={timeControlMinutes}
           onTimeControlChange={setTimeControlMinutes}
-          onStartGame ={() => setGameStarted(true)}  // pass start callback
+          onStartGame={handleStartGame}  // use the fixed handler
         />
       ) : (
-       <ChessGame selectedBot={selectedBot} timeControl={timeControlMinutes} />
+        <ChessGame selectedBot={selectedBot} timeControl={timeControlMinutes} />
       )}
     </div>
-
   );
 }
 

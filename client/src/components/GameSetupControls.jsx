@@ -1,30 +1,58 @@
+import { useState } from "react";
 import BotSelector from "./BotSelector";
 import TimeControlSelector from "./TimeControlSelector";
 import StartButton from "./StartButton";
+import styles from "../styles/GameSetupControls.module.css";
 
-export default function GameSetupControls({
-  selectedBot,
-  onBotChange,
-  selectedTimeControl,
-  onTimeControlChange,
-  onStartGame, 
-}) {
+export default function GameSetupControls({ onStartGame }) {
+  const [step, setStep] = useState(1);
+  const [selectedBot, setSelectedBot] = useState(null);
+  const [selectedTimeControl, setSelectedTimeControl] = useState(5);
+
+  const nextStep = () => {
+    if (step === 1 && selectedBot) setStep(2);
+  };
+
+  const prevStep = () => {
+    if (step === 2) setStep(1);
+  };
+
+  const handleStart = () => {
+    if (selectedBot) onStartGame({ bot: selectedBot, time: selectedTimeControl });
+  };
 
   return (
-    
-    <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
-        <h2 style={{ margin: "2px" }}>Select an opponent and a time control</h2>
-      <div style={{ marginBottom: "1.5rem", marginTop:"10px" }}>
-        <TimeControlSelector
-          value={selectedTimeControl}
-          onChange={onTimeControlChange}
-        />
-      </div>
-    
-      <BotSelector value={selectedBot} onChange={onBotChange} />    
-      
-      <StartButton onClick={onStartGame}/>
-     
+    <div className={styles.container}>
+      <h2 className={styles.heading}>Start a New Game</h2>
+
+      {step === 1 && (
+        <>
+          <h3 className={styles.subheading}>Select Your Opponent</h3>
+          <div className={styles.botSelectorWrapper}>
+            <BotSelector value={selectedBot} onChange={setSelectedBot} />
+          </div>
+          <button
+            className={styles.nextButton}
+            onClick={nextStep}
+            disabled={!selectedBot}
+          >
+            Next
+          </button>
+        </>
+      )}
+
+      {step === 2 && (
+        <>
+          <h3>Choose Time Control</h3>
+          <TimeControlSelector value={selectedTimeControl} onChange={setSelectedTimeControl} />
+          <div className={styles.buttons}>
+            <button className={styles.backButton} onClick={prevStep}>
+              Back
+            </button>
+            <StartButton onClick={handleStart} />
+          </div>
+        </>
+      )}
     </div>
   );
 }
