@@ -32,7 +32,7 @@ export default function GameSetupControls({ onStartGame }) {
             <BotSelector value={selectedBot} onChange={setSelectedBot} />
           </div>
           <button
-            className={styles.nextButton}
+            className={`${styles.buttonBase} ${styles.nextButton}`}
             onClick={nextStep}
             disabled={!selectedBot}
           >
@@ -43,13 +43,24 @@ export default function GameSetupControls({ onStartGame }) {
 
       {step === 2 && (
         <>
-          <h3>Choose Time Control</h3>
-          <TimeControlSelector value={selectedTimeControl} onChange={setSelectedTimeControl} />
+          <h3 className={styles.subheading}>Choose Time Control</h3>
+          <TimeControlSelector
+            value={selectedTimeControl}
+            onChange={setSelectedTimeControl}
+          />
           <div className={styles.buttons}>
-            <button className={styles.backButton} onClick={prevStep}>
+            <button
+              className={`${styles.buttonBase} ${styles.backButton}`}
+              onClick={prevStep}
+            >
               Back
             </button>
-            <StartButton onClick={handleStart} />
+            <button
+              className={`${styles.buttonBase} ${styles.startButton}`}
+              onClick={handleStart}
+            >
+              Start Game
+            </button>
           </div>
         </>
       )}

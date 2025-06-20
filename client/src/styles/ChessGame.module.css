@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100dvh;
+  height: 95dvh;
   overflow: hidden;
   box-sizing: border-box;
   padding: 0;
@@ -22,7 +22,6 @@
   max-width: 900px;
 }
 
-/* Wrap board and controls side by side on wide screens */
 .boardAndControlsWrapper {
   display: flex;
   width: 100%;
@@ -32,7 +31,6 @@
   flex-wrap: wrap;
 }
 
-/* Board and timers on left side */
 .boardSection {
   display: flex;
   flex-direction: column;
@@ -41,7 +39,6 @@
   min-width: 300px;
 }
 
-/* Top and bottom row styles as you had */
 .topRow,
 .bottomRow {
   display: flex;
@@ -60,7 +57,7 @@
 }
 
 .botImage {
-  width: 50px;
+  width: 44px;
   height: 50px;
   border-radius: 50%;
 }
@@ -85,7 +82,6 @@
   font-family: monospace;
 }
 
-/* Control buttons wrapper on right */
 .buttonsWrapper {
   display: flex;
   flex-direction: column;
@@ -93,29 +89,29 @@
   justify-content: flex-end;
   flex-shrink: 0;
   min-width: 120px;
-  margin-top: 3rem;
-  /* align to bottom-ish */
+  margin-top: 20.3rem;
 }
 
-/* Buttons styling */
+/* Updated nicer button colors */
 .button {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   color: #fff;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #4a90e2, #357ABD);
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(53, 122, 189, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #357ABD, #2a5c8c);
+  box-shadow: 0 6px 12px rgba(42, 92, 140, 0.6);
 }
 
-/* Responsive: stack vertically on narrow/mobile */
 @media (max-width: 700px) {
   .boardAndControlsWrapper {
     flex-direction: column;
@@ -131,7 +127,22 @@
   }
 
   .button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #4a90e2, #357ABD);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(53, 122, 189, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     width: auto;
-    flex: 1 1 50%;
+    flex: 1 1 auto;
+  }
+
+  .button:hover {
+    background: linear-gradient(135deg, #357ABD, #2a5c8c);
+    box-shadow: 0 6px 12px rgba(42, 92, 140, 0.6);
   }
 }

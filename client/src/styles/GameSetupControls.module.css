@@ -1,6 +1,5 @@
 .container {
     max-width: 700px;
-    /* wider if possible */
     width: 100%;
     margin: 0 auto;
     padding: 1rem;
@@ -8,56 +7,25 @@
     flex-direction: column;
     gap: 1rem;
     flex-shrink: 0;
-    /* prevent shrinking */ }
+
+}
 
 .heading {
     font-size: 1.75rem;
     text-align: center;
-    padding:0px;
-    margin-bottom:0;
-    margin-top:4px;
+    padding: 0;
+    margin: 4px 0 0 0;
 }
 
 .subheading {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 0px;
-    margin-top:0px;
+    margin: 0 0 0 0;
     text-align: center;
 }
 
-.step {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-}
-
-.nextButton {
-    width:20%;
-    align-self: center;
-    margin-top: 2rem;
-    padding: 0.75rem 2rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    animation: pulse 1.8s infinite;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.nextButton:hover {
-    background-color: #0056b3;
-    animation: none;
-}
-
-.nextButton:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-    animation: none;
+.botSelectorWrapper {
+    /* your existing bot selector styles */
 }
 
 .buttons {
@@ -65,26 +33,62 @@
     justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
-/* Back button styled like Start button but gray, no pulse */
-.backButton {
-    margin-top: 2rem;
+.buttonBase {
+    width: 33%;
     padding: 0.75rem 2rem;
     font-size: 1.25rem;
     font-weight: bold;
-    color: #fff;
-    background-color: #6c757d;
-    border: none;
     border-radius: 8px;
     cursor: pointer;
+    border: none;
+    color: #fff;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.buttonBase:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+    animation: none;
+}
+
+/* Next button - blue */
+.nextButton {
+    background-color: #007bff;
+    animation: pulse 1.8s infinite;
+    align-self: center;
+}
+
+.nextButton:hover:not(:disabled) {
+    background-color: #0056b3;
+    animation: none;
+}
+
+/* Back button - gray */
+.backButton {
+    background-color: #6c757d;
 }
 
 .backButton:hover {
     background-color: #5a6268;
 }
 
+/* Start button - green with pulse */
+.startButton {
+    background-color: #28a745;
+    animation: pulse 1.8s infinite;
+}
+
+.startButton:hover {
+    background-color: #1e7e34;
+    animation: none;
+}
+
+/* Pulse animation */
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
@@ -99,6 +103,7 @@
     }
 }
 
+/* Responsive */
 @media (max-width: 480px) {
     .container {
         padding: 1rem;
@@ -112,8 +117,7 @@
         font-size: 1rem;
     }
 
-    .nextButton,
-    .backButton {
+    .buttonBase {
         width: 100%;
     }
 

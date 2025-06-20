@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import useChessGame from "../hooks/useChessGame";
 import useChessTimer from "../hooks/useChessTimer";
@@ -6,8 +6,11 @@ import useMoveAudio from "../hooks/useMoveAudio";
 import EndGameOverlay from "./EndGameOverlay";
 import styles from "../styles/ChessGame.module.css";
 
+const moveSoundSrc = "/ChessMoveDefault.mp3";
+const captureSoundSrc = "/ChessMoveCapture.mp3";
+
 export default function ChessGame({ selectedBot, timeControl }) {
-  const playAudioForMove = useMoveAudio("/ChessMoveDefault.mp3", "/ChessMoveCapture.mp3");
+  const playAudioForMove = useMoveAudio(moveSoundSrc, captureSoundSrc);
 
   const {
     game,
@@ -15,11 +18,30 @@ export default function ChessGame({ selectedBot, timeControl }) {
     onTakeback,
     isPlayerTurn,
     gameResult,
-  } = useChessGame("w", timeControl * 60, playAudioForMove, selectedBot.depth, selectedBot.rating);
+  } = useChessGame(
+    "w",
+    timeControl * 60,
+    playAudioForMove,
+    selectedBot.depth,
+    selectedBot.rating
+  );
 
   const { whiteTime, blackTime } = useChessTimer(game, timeControl * 60);
 
-  const onQuit = () => window.location.reload();
+  const [displayWhiteTime, setDisplayWhiteTime] = useState(whiteTime);
+  const [displayBlackTime, setDisplayBlackTime] = useState(blackTime);
+
+  useEffect(() => {
+    setDisplayWhiteTime(whiteTime);
+  }, [whiteTime]);
+
+  useEffect(() => {
+    setDisplayBlackTime(blackTime);
+  }, [blackTime]);
+
+  const onQuit = () => {
+    window.location.reload();
+  };
 
   const formatTime = (seconds) => {
     const m = Math.floor(seconds / 60);
@@ -27,15 +49,15 @@ export default function ChessGame({ selectedBot, timeControl }) {
     return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   };
 
-  const boardWidth = Math.min(window.innerWidth, window.innerHeight - 250);
+  // Dynamically size board to fit screen, with some margin for controls
+  const boardWidth = Math.min(window.innerWidth - 32, window.innerHeight - 250, 700);
 
   return (
     <div className={styles.page}>
       <div className={styles.container}>
         <div className={styles.boardAndControlsWrapper}>
-
-          {/* Left side: Board + Top and Bottom timers/info */}
           <div className={styles.boardSection}>
+            {/* Top row: Bot info and Black timer */}
             <div className={styles.topRow}>
               <div className={styles.botInfo}>
                 <img
@@ -45,14 +67,17 @@ export default function ChessGame({ selectedBot, timeControl }) {
                 />
                 <div>
                   <div className={styles.botName}>{selectedBot.name}</div>
-                  <div className={styles.botRating}>Rating: {selectedBot.rating}</div>
+                  <div className={styles.botRating}>
+                    Rating: {selectedBot.rating}
+                  </div>
                 </div>
               </div>
               <div className={styles.timer}>
-                <strong>Black:</strong> {formatTime(blackTime)}
+                <strong>Black:</strong> {formatTime(displayBlackTime)}
               </div>
             </div>
 
+            {/* Chessboard */}
             <Chessboard
               id="main-board"
               position={game.fen()}
@@ -65,22 +90,27 @@ export default function ChessGame({ selectedBot, timeControl }) {
               }}
             />
 
+            {/* Bottom row: You (White) timer */}
             <div className={styles.bottomRow}>
               <div className={styles.playerLabel}>You</div>
               <div className={styles.timer}>
-                <strong>White:</strong> {formatTime(whiteTime)}
+                <strong>White:</strong> {formatTime(displayWhiteTime)}
               </div>
             </div>
           </div>
 
-          {/* Right side: Control buttons */}
+          {/* Control buttons */}
           <div className={styles.buttonsWrapper}>
-            <button onClick={onQuit} className={styles.button}>Quit</button>
-            <button onClick={onTakeback} className={styles.button}>Takeback</button>
+            <button onClick={onQuit} className={styles.button}>
+              Quit
+            </button>
+            <button onClick={onTakeback} className={styles.button}>
+              Takeback
+            </button>
           </div>
-
         </div>
 
+        {/* End game overlay */}
         {gameResult && <EndGameOverlay gameResult={gameResult} />}
       </div>
     </div>
