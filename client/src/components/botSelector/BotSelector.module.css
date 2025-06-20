@@ -1,25 +1,23 @@
+@media (max-width: 480px) {
+  .botSelectorWrapper {
+    max-height: 450px;
+    overflow-y: auto;
+  }
+}
+
 .botSelectorWrapper {
-  width: 50vw;       /* about half viewport width */
-  height: 60vw;      /* same as width for square */
-  max-width: 600px;  /* optional max size */
-  max-height: 500px; /* optional max size */
-  margin: 0 auto;    /* center horizontally */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* margin-top:55px; */
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  height: auto;
 }
 
 .BotSelector {
   width: 100%;
-
   display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1rem 1.5rem; 
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem 1.5rem;
 }
-
 .botCard {
   cursor: pointer;
   border: 1px solid #ccc;
@@ -28,7 +26,6 @@
   border-radius: 8px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,7 +49,7 @@
 }
 
 img {
-  max-width: 100%;
+  max-width: 58%;
   height: auto;
   border-radius: 50%;
 }

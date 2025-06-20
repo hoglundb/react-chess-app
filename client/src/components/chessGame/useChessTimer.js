@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Chess } from "chess.js";
 
 export default function useChessTimer(game, initialTimeSeconds = 5 * 60) {
   const [whiteTime, setWhiteTime] = useState(initialTimeSeconds);
