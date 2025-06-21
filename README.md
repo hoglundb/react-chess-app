@@ -31,7 +31,7 @@ npm start
 ```
 
 ### Run the Server
-``` 
+``` bash
 cd server
 npm install
 npm run dev
