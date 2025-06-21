@@ -18,6 +18,7 @@ export default function ChessGame({ selectedBot, timeControl }) {
     onTakeback,
     isPlayerTurn,
     gameResult,
+    setGameResult, // Added from updated hook
   } = useChessGame(
     "w",
     playAudioForMove,
@@ -37,6 +38,19 @@ export default function ChessGame({ selectedBot, timeControl }) {
   useEffect(() => {
     setDisplayBlackTime(blackTime);
   }, [blackTime]);
+
+  // Timeout detection effects:
+  useEffect(() => {
+    if (displayWhiteTime <= 0 && !gameResult) {
+      setGameResult({ winner: "black", reason: "timeout" });
+    }
+  }, [displayWhiteTime, gameResult, setGameResult]);
+
+  useEffect(() => {
+    if (displayBlackTime <= 0 && !gameResult) {
+      setGameResult({ winner: "white", reason: "timeout" });
+    }
+  }, [displayBlackTime, gameResult, setGameResult]);
 
   const onQuit = () => {
     window.location.reload();
@@ -103,7 +117,7 @@ export default function ChessGame({ selectedBot, timeControl }) {
             <button onClick={onQuit} className={styles.button}>
               Quit
             </button>
-            <button onClick={onTakeback} className={styles.button}>
+            <button onClick={onTakeback} className={styles.button} disabled={!!gameResult}>
               Takeback
             </button>
           </div>

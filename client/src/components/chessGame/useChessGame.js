@@ -44,7 +44,7 @@ export default function useChessGame(
 
   const onDrop = useCallback(
     async (source, target) => {
-      if (!isPlayerTurn) return false;
+      if (!isPlayerTurn || gameResult) return false;
 
       try {
         const gameCopy = new Chess();
@@ -102,7 +102,7 @@ export default function useChessGame(
         return false;
       }
     },
-    [game, isPlayerTurn, playAudioForMove, depth, elo]
+    [game, isPlayerTurn, playAudioForMove, depth, elo, gameResult]
   );
 
   const onTakeback = useCallback(() => {
@@ -137,6 +137,8 @@ export default function useChessGame(
         return "Game Drawn.";
       case "checkmate":
         return gameResult.winner === "white" ? "White Wins!" : "Black Wins!";
+      case "timeout":
+        return gameResult.winner === "white" ? "White Wins by Timeout!" : "Black Wins by Timeout!";
       default:
         return "Game Over.";
     }
@@ -149,5 +151,6 @@ export default function useChessGame(
     isPlayerTurn,
     getStatusText,
     gameResult,
+    setGameResult, // expose this to allow timeout setting externally
   };
 }

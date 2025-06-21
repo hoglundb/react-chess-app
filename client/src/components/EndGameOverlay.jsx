@@ -4,12 +4,12 @@ export default function EndGameOverlay({ gameResult, playerColor = "w" }) {
   const { winner, reason } = gameResult;
   let message;
 
+  const playerWon = winner === (playerColor === "w" ? "white" : "black");
+
   if (reason === "checkmate") {
-    if (winner === (playerColor === "w" ? "white" : "black")) {
-      message = "Checkmate — You win!";
-    } else {
-      message = "Checkmate — You lose!";
-    }
+    message = playerWon ? "Checkmate — You win!" : "Checkmate — You lose!";
+  } else if (reason === "timeout") {
+    message = playerWon ? "Time — You win!" : "Time — You lose!";
   } else if (
     reason === "stalemate" ||
     reason === "insufficient_material" ||
@@ -39,7 +39,10 @@ export default function EndGameOverlay({ gameResult, playerColor = "w" }) {
 
 const overlayStyle = {
   position: "fixed",
-  top: 0, left: 0, right: 0, bottom: 0,
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
   backgroundColor: "rgba(0, 0, 0, 0.7)",
   color: "white",
   display: "flex",
