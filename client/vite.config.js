@@ -6,9 +6,10 @@ export default defineConfig({
   plugins: [react()],
 
     server: {
-    proxy: {
-      // Proxy all requests starting with /api to backend at port 4000
-      '/api': 'http://localhost:4000',
-    },
+      port: 3000,
+      proxy: {
+        // Proxy all requests starting with /api to backend at port 4000
+        '/api': 'http://localhost:4000',
+      },
   },
 })
