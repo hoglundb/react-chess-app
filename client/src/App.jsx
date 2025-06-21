@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ChessGame from "./components/ChessGame";
-import GameSetupControls from "./components/GameSetupControls";
+import ChessGame from "./components/chessGame/ChessGame";
+import GameSetupControls from "./components/gameSetupControls/GameSetupControls";
 import "./App.css";
 
 function App() {
