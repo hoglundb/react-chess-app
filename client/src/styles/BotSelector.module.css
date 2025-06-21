@@ -10,7 +10,6 @@
 .botSelectorWrapper {
   width: 100%;
   max-width: 600px;
-  /* optional, same as container */
   margin: 0 auto;
   height: auto;
 }

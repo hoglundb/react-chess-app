@@ -34,8 +34,9 @@
 
 .pulseButton:hover {
   background-color: #0056b3;
-  animation: none; /* stop pulse on hover if you want */
+  animation: none;
 }
+
 .pulseButton:disabled {
   background-color: #aaa;
   cursor: not-allowed;
