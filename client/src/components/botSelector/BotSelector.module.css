@@ -1,9 +1,7 @@
 @media (max-width: 480px) {
   .botSelectorWrapper {
     max-height: 450px;
-    /* smaller max height */
     overflow-y: auto;
-    /* scroll inside if needed */
   }
 }
 
