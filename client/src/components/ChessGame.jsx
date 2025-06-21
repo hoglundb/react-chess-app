@@ -20,7 +20,6 @@ export default function ChessGame({ selectedBot, timeControl }) {
     gameResult,
   } = useChessGame(
     "w",
-    timeControl * 60,
     playAudioForMove,
     selectedBot.depth,
     selectedBot.rating
