@@ -1,8 +1,7 @@
 import { useState } from "react";
-import BotSelector from "./BotSelector";
-import TimeControlSelector from "./TimeControlSelector";
-import StartButton from "./StartButton";
-import styles from "../styles/GameSetupControls.module.css";
+import BotSelector from "../botSelector/BotSelector";
+import TimeControlSelector from "../timeControlSelector/TimeControlSelector";
+import styles from "./GameSetupControls.module.css";
 
 export default function GameSetupControls({ onStartGame }) {
   const [step, setStep] = useState(1);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../styles/BotSelector.module.css";
+import styles from "./BotSelector.module.css";
 
 const bots = [
   { id: "bot1", name: "Bruton Gaster", rating: 800, depth: 1, image: "/bots/Avatar1.png" },
@@ -15,7 +15,6 @@ export default function BotSelector({ value, onChange }) {
 
   useEffect(() => {
     if (!value) {
-      // Initialize external handler if no value provided
       onChange && onChange(bots[0]);
     } else {
       setSelectedBot(value);

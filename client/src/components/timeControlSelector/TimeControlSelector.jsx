@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/TimeControlSelector.module.css";
+import styles from "./TimeControlSelector.module.css";
 
 export default function TimeControlSelector({ value, onChange }) {
   return (

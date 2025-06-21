@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
-import useChessGame from "../hooks/useChessGame";
-import useChessTimer from "../hooks/useChessTimer";
-import useMoveAudio from "../hooks/useMoveAudio";
-import EndGameOverlay from "./EndGameOverlay";
-import styles from "../styles/ChessGame.module.css";
+import useChessGame from "./useChessGame";
+import useChessTimer from "./useChessTimer";
+import useMoveAudio from "./useMoveAudio";
+import EndGameOverlay from "../EndGameOverlay";
+import styles from "./ChessGame.module.css";
 
 const moveSoundSrc = "/ChessMoveDefault.mp3";
 const captureSoundSrc = "/ChessMoveCapture.mp3";
