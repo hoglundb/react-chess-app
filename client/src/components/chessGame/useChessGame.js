@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import { Chess } from "chess.js";
-import { getStockfishMove } from "../../utils/stockfishApi";
+import { getStockfishMove } from "./stockfishApi";
 
 export default function useChessGame(
   playerColor = "w",
@@ -13,6 +13,9 @@ export default function useChessGame(
 
   const isPlayerTurn = game.turn() === playerColor;
   const aiMovePending = useRef(false);
+  const playerIsWhite = playerColor === "w";
+
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const getGameResult = (chessInstance) => {
     if (!chessInstance.isGameOver()) return null;
@@ -65,11 +68,7 @@ export default function useChessGame(
         }
 
         aiMovePending.current = true;
-
-        const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-        const waitMs = Math.floor(Math.random() * 3000) + 1000;
-        await delay(waitMs);
-
+        await delay(Math.floor(Math.random() * 3000) + 1000);
         if (!aiMovePending.current) return true;
 
         const response = await getStockfishMove(gameCopy.fen(), depth, elo);
@@ -92,9 +91,7 @@ export default function useChessGame(
           setGame(updatedGame);
 
           const result2 = getGameResult(updatedGame);
-          if (result2) {
-            setGameResult(result2);
-          }
+          if (result2) setGameResult(result2);
         }
 
         aiMovePending.current = false;
@@ -114,10 +111,10 @@ export default function useChessGame(
     const newGame = new Chess();
     newGame.loadPgn(game.pgn());
 
-    const playerIsWhite = playerColor === "w";
     const currentTurn = newGame.turn();
+    const playerToMove = (playerIsWhite && currentTurn === "w") || (!playerIsWhite && currentTurn === "b");
 
-    if ((playerIsWhite && currentTurn === "w") || (!playerIsWhite && currentTurn === "b")) {
+    if (playerToMove) {
       newGame.undo();
       newGame.undo();
     } else {
@@ -126,22 +123,23 @@ export default function useChessGame(
 
     setGame(newGame);
     setGameResult(null);
-  }, [game, playerColor]);
+  }, [game, playerIsWhite]);
 
   const getStatusText = useCallback(() => {
     if (!gameResult) {
       return game.turn() === "w" ? "White to move" : "Black to move";
     }
-    if (
-      gameResult.reason === "draw" ||
-      gameResult.reason === "stalemate" ||
-      gameResult.reason === "insufficient_material"
-    ) {
-      return "Game Drawn.";
+
+    switch (gameResult.reason) {
+      case "draw":
+      case "stalemate":
+      case "insufficient_material":
+        return "Game Drawn.";
+      case "checkmate":
+        return gameResult.winner === "white" ? "White Wins!" : "Black Wins!";
+      default:
+        return "Game Over.";
     }
-    if (gameResult.winner === "white") return "White Wins!";
-    if (gameResult.winner === "black") return "Black Wins!";
-    return "Game Over.";
   }, [game, gameResult]);
 
   return {

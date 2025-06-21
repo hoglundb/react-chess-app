@@ -6,8 +6,8 @@ import useMoveAudio from "./useMoveAudio";
 import EndGameOverlay from "../EndGameOverlay";
 import styles from "./ChessGame.module.css";
 
-const moveSoundSrc = "/ChessMoveDefault.mp3";
-const captureSoundSrc = "/ChessMoveCapture.mp3";
+const moveSoundSrc = "/audio/ChessMoveDefault.mp3";
+const captureSoundSrc = "/audio/ChessMoveCapture.mp3";
 
 export default function ChessGame({ selectedBot, timeControl }) {
   const playAudioForMove = useMoveAudio(moveSoundSrc, captureSoundSrc);
