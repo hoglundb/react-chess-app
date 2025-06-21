@@ -39,6 +39,7 @@ npm run dev
 
 ### Ensure the stockfish exe can be executed. The server will need to be able to run this as a background process.
 ``` bash
+cd stockfish
 chmod +x stockfish-ubuntu-x86-64-avx2
 ```
 
