@@ -1,4 +1,4 @@
-# React Chess Portfolio App
+# React Chess App
 
 🚀 [Live Demo](http://164.92.71.189:4000/)
 
