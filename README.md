@@ -1,6 +1,6 @@
 # React Chess App
 
-🚀 [Live Demo](http://164.92.71.189:4000/)
+🚀 [Live Demo](https://brianhoglundportfolio.com)
 
 ## Overview  
 This is a React-based chess application that integrates three key libraries to provide a complete chess-playing experience:
@@ -19,7 +19,7 @@ The project showcases how these tools can be combined in a modern frontend archi
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/react-chess.git
+git clone https://github.com/hoglundb/react-chess.git
 cd react-chess
 ```
 
